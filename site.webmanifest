@@ -1,0 +1,22 @@
+{
+  "name": "7 SevenCode",
+  "short_name": "7 SevenCode",
+  "description": "Software house especializada em desenvolvimento de sites, sistemas web e e-commerces sob medida.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#17191f",
+  "theme_color": "#0479da",
+  "icons": [
+    {
+      "src": "/assets/img/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

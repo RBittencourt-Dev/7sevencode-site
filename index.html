@@ -1,64 +1,235 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <!-- ===== META TAGS ESSENCIAIS ===== -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Title e Description para SEO -->
-    <title>7 Seven Code | Desenvolvimento Web, Sites e Softwares</title>
-    <meta name="description" content="Desenvolvimento de sites, softwares e e-commerces sob medida. Especializada em soluções web robustas, design minimalista e alto impacto. Transformamos suas ideias em realidade digital." />
-    <meta name="keywords" content="desenvolvimento web, criar site, desenvolvimento de software, e-commerce, sistemas web, design web, agência web" />
-    <meta name="author" content="7 Seven Code" />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://7sevencode.com.br" />
-    
-    <!-- Links para favicons -->
-    <link rel="icon" type="image/svg+xml" href="./assets/7logo.svg" />
-    <link rel="apple-touch-icon" href="./assets/7logo.svg" />
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css" />
-    <!-- ===== FIM META TAGS ===== -->
-  </head>
-  <body>
-    <!-- ===== BACKGROUND DE PARTÍCULAS INTERATIVAS ===== -->
-    <!-- Canvas para renderizar o sistema de partículas que responde ao cursor -->
-    <canvas id="particleCanvas"></canvas>
-    <!-- ===== FIM BACKGROUND DE PARTÍCULAS ===== -->
 
-    <main>
-      <nav>
+    <!-- ==================== SEO BÁSICO ==================== -->
+    <title>7 SevenCode | Desenvolvimento de Software e Sites Sob Medida</title>
+    <meta
+      name="description"
+      content="Software house especializada em desenvolvimento de sites, sistemas web e e-commerces sob medida. Transformamos ideias em soluções digitais de alto impacto, com código próprio e design minimalista."
+    />
+    <meta
+      name="keywords"
+      content="desenvolvimento de software, criação de sites, sistemas web, e-commerce, software sob medida, software house, desenvolvimento web, 7 SevenCode, SevenCode"
+    />
+    <meta name="author" content="7 SevenCode" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0479da" />
+    <link rel="canonical" href="https://7sevencode.com.br/" />
+    <link rel="icon" type="image/webp" href="./assets/img/logo-7.webp" />
+    <link rel="manifest" href="./site.webmanifest" />
+
+    <!-- ==================== OPEN GRAPH (preview WhatsApp / redes) ==================== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="7 SevenCode" />
+    <meta
+      property="og:title"
+      content="7 SevenCode | Desenvolvimento de Software e Sites Sob Medida"
+    />
+    <meta
+      property="og:description"
+      content="Software house especializada em sites, sistemas web e e-commerces sob medida. Transformamos ideias em soluções digitais de alto impacto."
+    />
+    <meta property="og:url" content="https://7sevencode.com.br/" />
+    <meta property="og:image" content="https://7sevencode.com.br/assets/img/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!-- ==================== TWITTER ==================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="7 SevenCode | Desenvolvimento de Software e Sites Sob Medida"
+    />
+    <meta
+      name="twitter:description"
+      content="Software house especializada em sites, sistemas web e e-commerces sob medida."
+    />
+    <meta name="twitter:image" content="https://7sevencode.com.br/assets/img/og-image.png" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- ==================== DADOS ESTRUTURADOS (SEO / AEO / GEO) ==================== -->
+    <!-- Ajuda o Google e as IAs (ChatGPT, Perplexity, AI Overviews) a entenderem a empresa -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://7sevencode.com.br/#organizacao",
+            "name": "7 SevenCode",
+            "alternateName": "SevenCode",
+            "url": "https://7sevencode.com.br/",
+            "logo": "https://7sevencode.com.br/assets/img/logo-nav.webp",
+            "image": "https://7sevencode.com.br/assets/img/og-image.png",
+            "description": "Software house especializada em desenvolvimento de sites, sistemas web e e-commerces sob medida.",
+            "founder": {
+              "@type": "Person",
+              "name": "Rafael Bittencourt"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "Brasil"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+55-51-98012-8983",
+              "contactType": "customer service",
+              "availableLanguage": ["Portuguese"]
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Serviços de desenvolvimento",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Sites institucionais sob medida"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Sistemas web e SaaS"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "E-commerces de alta conversão"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Software sob medida"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://7sevencode.com.br/#site",
+            "url": "https://7sevencode.com.br/",
+            "name": "7 SevenCode",
+            "inLanguage": "pt-BR",
+            "publisher": { "@id": "https://7sevencode.com.br/#organizacao" }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://7sevencode.com.br/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Quanto custa para desenvolver um site ou sistema?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Cada projeto é sob medida, então o valor depende do escopo. Fazemos um orçamento gratuito e sem compromisso após entender a sua necessidade — é só chamar no WhatsApp."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Quanto tempo leva para o projeto ficar pronto?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Depende da complexidade. Um site institucional costuma levar algumas semanas; sistemas e e-commerces variam conforme as funcionalidades. Definimos prazos claros antes de iniciar."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Vocês desenvolvem sistemas sob medida?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sim. Somos uma software house focada em desenvolvimento sob medida: sites, sistemas web, e-commerces e software para necessidades específicas do seu negócio."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "O código é próprio ou usam construtores prontos?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Desenvolvemos com código próprio, o que garante desempenho, segurança e liberdade total para evoluir o projeto sem amarras de plataformas fechadas."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Vocês atendem clientes de outras cidades?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sim, atendemos de forma remota clientes de qualquer lugar do Brasil."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- ==================== NAVEGAÇÃO ==================== -->
+    <header>
+      <nav aria-label="Menu principal">
         <img
           class="logo7code"
-          src="./assets/7 SevenCode Cinza & Azul svg.svg"
-          alt="logo SevenCode"
+          src="./assets/img/logo-nav.webp"
+          alt="7 SevenCode - software house"
+          width="300"
+          height="56"
         />
 
-        <ul>
+        <ul class="menu-desktop">
           <li><a href="#home">Home</a></li>
           <li><a href="#sobre">Sobre Nós</a></li>
           <li><a href="#devs">Devs</a></li>
           <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
 
-      <button class="btn-hamburguer">☰</button>
-
+      <!-- Botão e menu do celular -->
+      <button class="btn-hamburguer" aria-label="Abrir menu" aria-expanded="false">
+        ☰
+      </button>
       <div class="menu-celular">
-        <a class="items-list" href="#home">Home</a>
-        <a class="items-list" href="#sobre">Sobre Nós</a>
-        <a class="items-list" href="#devs">Devs</a>
-        <a class="items-list" href="#projetos">Projetos</a>
-        <a class="items-list" href="#contato">Contato</a>
+        <a href="#home">Home</a>
+        <a href="#sobre">Sobre Nós</a>
+        <a href="#devs">Devs</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contato">Contato</a>
       </div>
+    </header>
 
+    <main>
+      <!-- ==================== HOME ==================== -->
       <section id="home">
         <div class="home-container">
           <div class="home-logos">
-            <img class="logo-7" src="./assets/7logo.svg" alt="" width="200px" />
-            <img class="code" src="./assets/code .svg" alt="" width="230px" />
+            <img
+              class="logo-7"
+              src="./assets/img/logo-7.webp"
+              alt="Símbolo 7 da 7 SevenCode"
+              width="240"
+              height="240"
+            />
+            <img
+              class="code"
+              src="./assets/img/logo-code.webp"
+              alt="Code"
+              width="295"
+              height="295"
+            />
           </div>
 
           <div class="home-texts">
@@ -70,10 +241,11 @@
             <hr />
 
             <h2>
-              Transformamos ideias complexas em sistemas web robustos, <br />
+              Transformamos ideias complexas em sistemas web robustos,
               e-commerces de alta conversão e design minimalista.
             </h2>
           </div>
+
           <div class="home-cta-buttons">
             <a class="home-cta-button" href="#projetos">Ver Projetos</a>
             <a
@@ -87,10 +259,9 @@
         </div>
       </section>
 
+      <!-- ==================== SOBRE NÓS ==================== -->
       <section id="sobre" class="surgir-ao-scroll">
         <div class="container-sobre">
-          <!-- Sessão dos Sobre Nós -->
-
           <h3>Sobre Nós</h3>
           <p>
             Fundada por Rafael Bittencourt, a SevenCode nasceu com o propósito
@@ -106,162 +277,247 @@
         </div>
       </section>
 
-      <!-- Sessão dos Desenvolvedores -->
+      <!-- ==================== DEVS ==================== -->
       <section id="devs" class="surgir-ao-scroll">
         <div class="devs-header">
           <h3>Devs</h3>
-          <p class="devs-subtitle">7 coders</p>
+          <p class="devs-subtitle">O time por trás da 7 SevenCode</p>
         </div>
-        <div class="Devs">
-          <!-- Dev Rafael -->
-          <div class="Dev">
+
+        <div class="devs-lista">
+          <article class="dev">
             <img
-              class="perfil-dev"
-              src="./assets/devs/Rafael Bittencourt.png"
-              alt="Rafael Bittencourt | CEO"
+              class="dev-foto"
+              src="./assets/img/dev-rafael.webp"
+              alt="Rafael Bittencourt, CEO e desenvolvedor FullStack da 7 SevenCode"
+              width="240"
+              height="240"
+              loading="lazy"
             />
             <h4>Rafael Bittencourt</h4>
             <p>Desenvolvedor FullStack</p>
-            <p2>CEO</p2>
-          </div>
+            <span class="dev-cargo">CEO</span>
+          </article>
 
-          <div class="Dev">
+          <article class="dev">
             <img
-              class="perfil-dev"
-              src="./assets/devs/jesus.png"
-              alt="Jesus | Partner"
+              class="dev-foto"
+              src="./assets/img/dev-jesus.webp"
+              alt="Jesus, sócio e desenvolvedor FullStack da 7 SevenCode"
+              width="240"
+              height="240"
+              loading="lazy"
             />
             <h4>Jesus</h4>
             <p>Desenvolvedor FullStack</p>
-            <p2>Sócio</p2>
-          </div>
-
+            <span class="dev-cargo">Sócio</span>
+          </article>
         </div>
       </section>
 
+      <!-- ==================== PROJETOS ==================== -->
       <section id="projetos" class="surgir-ao-scroll">
         <div class="projetos-header">
           <h3>Projetos</h3>
-          <p class="projetos-subtitle"> Reais Desenvolvidos pela 7 SevenCode</p>
+          <p class="projetos-subtitle">Reais Desenvolvidos pela 7 SevenCode</p>
         </div>
 
-        <div class="Projetos">
-          <!-- Modelo para copiar e trocar as informações -->
-
+        <div class="projetos-lista">
           <!-- Porthon -->
-          <article class="Projeto">
-  
+          <article class="projeto">
             <div class="projeto-image">
-              <img src="./assets/Projetos/Porthon-Mockup.png" alt="Porthon">
+              <img
+                src="./assets/img/proj-porthon.webp"
+                alt="Porthon - sistema de gestão condominial"
+                width="780"
+                height="440"
+                loading="lazy"
+              />
             </div>
-  
             <div class="projeto-content">
               <h4>Porthon</h4>
-              <p>Sistema integrado de gestão condominial 
-                desenvolvido para centralizar o fluxo de 
-                encomendas e o controle de moradores, 
-                veículos e funcionários. O software 
-                está ativo e homologado no condomínio Ventos do Sul, 
-                enquanto novas funcionalidades são 
-                implementadas para prepará-lo para expansão 
-                e distribuição em outros condomínios.
+              <p>
+                Sistema integrado de gestão condominial desenvolvido para
+                centralizar o fluxo de encomendas e o controle de moradores,
+                veículos e funcionários. O software está ativo e homologado no
+                condomínio Ventos do Sul, enquanto novas funcionalidades são
+                implementadas para prepará-lo para expansão e distribuição em
+                outros condomínios.
               </p>
-  
               <div class="projeto-meta">
                 <span class="tag-software">SaaS</span>
                 <span class="tag-pessoal">Ativo / Escalando</span>
               </div>
             </div>
-  
           </article>
 
           <!-- 7 Planner -->
-          <article class="Projeto">
-  
+          <article class="projeto">
             <div class="projeto-image">
-              <img src="./assets/Projetos/7planner-mockup.png" alt="7planner">
+              <img
+                src="./assets/img/proj-7planner.webp"
+                alt="7 Planner - plataforma de gestão de recursos e agendamentos"
+                width="780"
+                height="440"
+                loading="lazy"
+              />
             </div>
-  
             <div class="projeto-content">
               <h4>7 Planner</h4>
-              <p>Plataforma de gestão de recursos e 
-                agendamentos institucionais. Controla as 
-                demandas de marketing, reservas de 
-                Chromebooks e o uso de laboratórios e salas 
-                de arte. Inclui também um módulo de chat ao 
-                vivo para suporte em tempo real integrado 
-                com a equipe de T.I. do colégio.
+              <p>
+                Plataforma de gestão de recursos e agendamentos institucionais.
+                Controla as demandas de marketing, reservas de Chromebooks e o
+                uso de laboratórios e salas de arte. Inclui também um módulo de
+                chat ao vivo para suporte em tempo real integrado com a equipe
+                de T.I. do colégio.
               </p>
-  
               <div class="projeto-meta">
                 <span class="tag-software">System</span>
                 <span class="tag-pessoal">Projeto Interno - Colégio Adventista</span>
               </div>
             </div>
-  
           </article>
 
-          <!-- Site da Laura -->
-          <article class="Projeto">
-  
+          <!-- Psicóloga Laura -->
+          <article class="projeto">
             <div class="projeto-image">
-              <img src="./assets/Projetos/Laura-mockup.png" alt="site da Laura">
+              <img
+                src="./assets/img/proj-laura.webp"
+                alt="Site institucional da Psicóloga Laura Bergamo"
+                width="780"
+                height="440"
+                loading="lazy"
+              />
             </div>
-  
             <div class="projeto-content">
               <h4>Psicóloga Laura</h4>
-              <p>Site institucional desenvolvido sob medida 
-                para a Psicóloga Laura Bergamo. O projeto une 
-                uma experiência do usuário (UX) fluida a uma 
-                identidade visual personalizada com a paleta 
-                de cores da marca, além de aplicar técnicas 
-                avançadas de SEO para garantir um excelente 
-                posicionamento orgânico no Google.
+              <p>
+                Site institucional desenvolvido sob medida para a Psicóloga
+                Laura Bergamo. O projeto une uma experiência do usuário (UX)
+                fluida a uma identidade visual personalizada com a paleta de
+                cores da marca, além de aplicar técnicas avançadas de SEO para
+                garantir um excelente posicionamento orgânico no Google.
               </p>
-  
               <div class="projeto-meta">
                 <span class="tag-software">Site</span>
-                <a class="tag-pessoal"  href="https://psilaurabergamo.com.br" target="_blank">psilaurabergamo.com.br</a>
+                <a
+                  class="tag-pessoal"
+                  href="https://psilaurabergamo.com.br"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >psilaurabergamo.com.br</a
+                >
               </div>
             </div>
-  
           </article>
         </div>
       </section>
 
+      <!-- ==================== FAQ (bom para SEO / AEO / GEO) ==================== -->
+      <!-- Usa <details> nativo: abre/fecha SEM JavaScript. Fica livre pra você
+           reescrever depois com seu próprio JS se quiser treinar. -->
+      <section id="faq" class="surgir-ao-scroll">
+        <div class="faq-container">
+          <div class="faq-header">
+            <h3>Perguntas Frequentes</h3>
+            <p class="faq-subtitle">Tudo que você precisa saber antes de começar</p>
+          </div>
+
+          <div class="faq-lista">
+            <details class="faq-item">
+              <summary>Quanto custa para desenvolver um site ou sistema?</summary>
+              <p>
+                Cada projeto é sob medida, então o valor depende do escopo.
+                Fazemos um orçamento gratuito e sem compromisso após entender a
+                sua necessidade — é só chamar no WhatsApp.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Quanto tempo leva para o projeto ficar pronto?</summary>
+              <p>
+                Depende da complexidade. Um site institucional costuma levar
+                algumas semanas; sistemas e e-commerces variam conforme as
+                funcionalidades. Definimos prazos claros antes de iniciar.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Vocês desenvolvem sistemas sob medida?</summary>
+              <p>
+                Sim. Somos uma software house focada em desenvolvimento sob
+                medida: sites, sistemas web, e-commerces e software para
+                necessidades específicas do seu negócio.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>O código é próprio ou usam construtores prontos?</summary>
+              <p>
+                Desenvolvemos com código próprio, o que garante desempenho,
+                segurança e liberdade total para evoluir o projeto sem amarras
+                de plataformas fechadas.
+              </p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Vocês atendem clientes de outras cidades?</summary>
+              <p>
+                Sim, atendemos de forma remota clientes de qualquer lugar do
+                Brasil.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== CONTATO ==================== -->
       <section id="contato" class="surgir-ao-scroll">
         <div class="contato-container">
           <div class="contato-header">
             <h3>Transforme sua visão em realidade</h3>
-            <p class="contato-subtitle">Seu projeto merece uma equipe que entenda seu negócio</p>
+            <p class="contato-subtitle">
+              Seu projeto merece uma equipe que entenda seu negócio
+            </p>
           </div>
-
-          <div class="contato-grid">
 
           <div class="contato-cta-section">
             <div class="contato-message">
               <h2>Pronto para dar o próximo passo?</h2>
-              <p class="impacto-text">Não deixe suas ideias guardadas. A concorrência não espera, e o mercado está pronto para quem agir agora.</p>
+              <p class="impacto-text">
+                Não deixe suas ideias guardadas. A concorrência não espera, e o
+                mercado está pronto para quem agir agora.
+              </p>
             </div>
 
-            <a href="https://wa.me/5551980128983?text=Ol%C3%A1%20Rafael%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20projeto%21" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+            <a
+              href="https://wa.me/5551980128983?text=Ol%C3%A1%20Rafael%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20projeto%21"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-whatsapp"
+            >
               Solicitar Orçamento via WhatsApp
             </a>
+
+            <ul class="contato-trust">
+              <li>Resposta rápida via WhatsApp</li>
+              <li>Orçamento sem compromisso</li>
+              <li>Código próprio e sob medida</li>
+            </ul>
           </div>
-
-          <!-- <div class="contato-social">
-            <p>Nos Siga no Instagram </p>
-            <a href="https://instagram.com/7sevencode_" target="_blank" rel="noopener noreferrer" class="btn-instagram">
-              @7sevencode_
-            </a>
-          </div> -->
-
-          
         </div>
       </section>
+
+      <!-- ==================== RODAPÉ ==================== -->
       <footer class="site-footer">
-        <img src="./assets/7 SevenCode Cinza & Azul svg.svg" alt="SevenCode" />
-        <p>&copy; 2026 7 SevenCode. All rights reserved.</p>
+        <img
+          src="./assets/img/logo-nav.webp"
+          alt="7 SevenCode"
+          width="130"
+          height="24"
+          loading="lazy"
+        />
+        <p>&copy; 2026 7 SevenCode. Todos os direitos reservados.</p>
       </footer>
     </main>
 
