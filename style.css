@@ -458,6 +458,18 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
+/* Só os links (a.tag-pessoal) ganham hover — os spans não são clicáveis */
+a.tag-pessoal {
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+a.tag-pessoal:hover,
+a.tag-pessoal:focus-visible {
+  background: rgba(4, 121, 218, 0.18);
+  border-color: rgba(79, 178, 255, 0.45);
+  color: #8fd2ff;
+}
+
 .btn-projeto {
   width: 100%;
   padding: 10px 5px;
