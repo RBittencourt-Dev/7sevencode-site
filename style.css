@@ -127,6 +127,37 @@ nav::after {
   transform: scaleX(1);
 }
 
+/* ----- Botão "Entrar" (área interna da equipe) -----
+   Os outros itens do menu são links de âncora e usam o sublinhado que cresce.
+   Este é uma AÇÃO, e leva para fora do site — então vira pílula, no mesmo
+   desenho do .home-cta-button, para não parecer só mais um item da lista.
+   O ::after herdado é desligado: sublinhado somado à borda vira ruído. */
+.menu-desktop li.nav-entrar {
+  padding-bottom: 0;
+}
+
+.menu-desktop li.nav-entrar::after {
+  display: none;
+}
+
+.menu-desktop li.nav-entrar a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.3rem;
+  border: 1px solid #0479da;
+  border-radius: 22px;
+  color: #0479da;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-desktop li.nav-entrar:hover a,
+.menu-desktop li.nav-entrar a:focus-visible {
+  background-color: #0479da;
+  color: aliceblue;
+  box-shadow: 0 0 16px rgba(4, 121, 218, 0.55);
+}
+
 /* Menu do celular (escondido no desktop) */
 .btn-hamburguer {
   display: none;
@@ -892,6 +923,22 @@ img {
 
   .menu-celular a:hover {
     color: #0479da;
+  }
+
+  /* O "Entrar" mantém a forma de pílula também no celular: é a única ação
+     desta lista, e no desktop ela já se distingue assim. */
+  .menu-celular a.entrar-celular {
+    margin-top: 4px;
+    padding: 0.55rem 1.6rem;
+    border: 1px solid #0479da;
+    border-radius: 22px;
+    color: #0479da;
+    font-weight: 600;
+  }
+
+  .menu-celular a.entrar-celular:hover {
+    background-color: #0479da;
+    color: aliceblue;
   }
 
   #home {

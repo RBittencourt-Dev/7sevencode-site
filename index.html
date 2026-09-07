@@ -190,10 +190,16 @@
         <ul class="menu-desktop">
           <li><a href="#home">Home</a></li>
           <li><a href="#sobre">Sobre Nós</a></li>
-          <li><a href="#devs">Devs</a></li>
+          <li><a href="#devs">Equipe</a></li>
           <li><a href="#projetos">Projetos</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contato">Contato</a></li>
+          <!-- Área interna da equipe. Mora em outro lugar — uma aplicação com
+               servidor, porque este site é estático e não guarda segredo. Por
+               isso é link absoluto, e não âncora como os de cima. -->
+          <li class="nav-entrar">
+            <a href="https://painel-7sevencode.vercel.app" rel="noopener">Entrar</a>
+          </li>
         </ul>
       </nav>
 
@@ -204,10 +210,11 @@
       <div class="menu-celular">
         <a href="#home">Home</a>
         <a href="#sobre">Sobre Nós</a>
-        <a href="#devs">Devs</a>
+        <a href="#devs">Equipe</a>
         <a href="#projetos">Projetos</a>
         <a href="#faq">FAQ</a>
         <a href="#contato">Contato</a>
+        <a class="entrar-celular" href="https://painel-7sevencode.vercel.app" rel="noopener">Entrar</a>
       </div>
     </header>
 
@@ -280,11 +287,26 @@
       <!-- ==================== DEVS ==================== -->
       <section id="devs" class="surgir-ao-scroll">
         <div class="devs-header">
-          <h3>Devs</h3>
+          <h3>Equipe</h3>
           <p class="devs-subtitle">O time por trás da 7 SevenCode</p>
         </div>
 
-        <div class="devs-lista">
+        <!--
+          OS CARDS ABAIXO SÃO O CHÃO, NÃO O CONTEÚDO FINAL.
+
+          A equipe de verdade vem do painel (7sevencode.com.br/painel), e o
+          script.js troca esta lista assim que a resposta chega. Estes dois
+          continuam escritos aqui de propósito: se o Supabase estiver fora do
+          ar, se a rede do visitante falhar ou se o JavaScript não rodar, a
+          seção continua mostrando a equipe em vez de um buraco.
+
+          Ou seja: o site nunca depende do banco para funcionar — ele só fica
+          mais atualizado quando o banco responde.
+
+          Quem entra nesta lista se cadastra no painel, em Acessos, marcando
+          "Aparece no site".
+        -->
+        <div class="devs-lista" data-equipe>
           <article class="dev">
             <img
               class="dev-foto"
@@ -527,6 +549,11 @@
       </footer>
     </main>
 
-    <script src="script.js" defer></script>
+    <!--
+      O ?v= existe para furar cache. Sem ele, o navegador de quem já visitou
+      o site continua rodando o script.js antigo por horas — e a pessoa jura
+      que a alteração não subiu. Suba o número a cada mudança no arquivo.
+    -->
+    <script src="script.js?v=4" defer></script>
   </body>
 </html>
