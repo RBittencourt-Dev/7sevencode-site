@@ -86,14 +86,14 @@ secoes.forEach((sec) => vigiaSecao.observe(sec));
    trecho busca a lista e substitui o HTML de reserva que está no index.html.
 
    POR QUE É SEGURO TER ESTA CHAVE AQUI
-   A chave abaixo é a `anon` do Supabase, e ela é PÚBLICA por definição — é a
+   A chave abaixo é a `publishable` do Supabase (a antiga `anon`), e ela é PÚBLICA por definição — é a
    mesma que qualquer aplicativo web entrega ao navegador. Quem protege os
    dados é a RLS do banco, não o segredo da chave.
 
    E o que ela alcança aqui é uma VIEW, `sv_equipe_publica`, que só tem nome,
-   função, cargo e foto. A tabela real, com e-mail e permissões, é
-   inalcançável por esta chave — RLS no Postgres é por LINHA, não por coluna,
-   então liberar a tabela vazaria o e-mail de cada funcionário junto.
+   função, cargo e foto. Desde 14/09/2026 o banco é o da 7SevenCode, não mais
+   o do Porthon, e a proteção é por COLUNA: esta chave só tem permissão de ler
+   as colunas do card. E-mail e permissões dão "permission denied".
 
    Se este trecho falhar por qualquer motivo, os cards escritos à mão no
    index.html continuam na tela. O site não depende do banco para funcionar.
@@ -103,8 +103,8 @@ secoes.forEach((sec) => vigiaSecao.observe(sec));
   var lista = document.querySelector("[data-equipe]");
   if (!lista) return;
 
-  var URL_BASE = "https://pvgkqykuqladeyzunpag.supabase.co";
-  var CHAVE = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB2Z2txeWt1cWxhZGV5enVucGFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NzE1NzQsImV4cCI6MjA5MTQ0NzU3NH0.DeJ0kUMTXy0zRXaVNBh8UaQDOcRxHt6BKCOgi4RI-XA";
+  var URL_BASE = "https://bepqsgynsuipgpuolzjo.supabase.co";
+  var CHAVE = "sb_publishable_Zv1BzllCxVUiS0alqFsnRA_nelpleND";
 
   var consulta =
     "/rest/v1/sv_equipe_publica?select=nome,funcao,cargo,foto_url&order=ordem";
