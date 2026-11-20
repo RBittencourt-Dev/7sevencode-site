@@ -2,9 +2,21 @@
   "redirects": [
     {
       "source": "/:path*",
+      "has": [{ "type": "host", "value": "7sevencode-site.vercel.app" }],
+      "destination": "https://7sevencode.com.br/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
       "has": [{ "type": "host", "value": "www.7sevencode.com.br" }],
       "destination": "https://7sevencode.com.br/:path*",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/llms.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
     }
   ]
 }
