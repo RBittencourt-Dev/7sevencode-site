@@ -1,0 +1,31 @@
+# 7 SevenCode
+
+> Software house brasileira, sediada em Porto Alegre (RS), especializada em desenvolvimento sob medida de sites institucionais, sistemas web/SaaS e e-commerces, com código próprio (sem construtores prontos). Atende clientes de forma remota em todo o Brasil.
+
+- Fundador e CEO: Rafael Bittencourt (Desenvolvedor FullStack)
+- Base: Porto Alegre, RS, Brasil (trabalho remoto, sem escritório físico)
+- Área de atendimento: todo o Brasil, de forma remota
+- Idioma de atendimento: português
+- Contato e orçamento (gratuito e sem compromisso): WhatsApp +55 51 98012-8983 — https://wa.me/5551980128983
+- Site: https://7sevencode.com.br/
+
+## Serviços
+
+- Sites institucionais sob medida: rápidos, responsivos e otimizados para SEO.
+- Sistemas web e SaaS: plataformas de gestão, painéis administrativos e automação de processos.
+- E-commerces: lojas online com catálogo, carrinho, cupons e painel administrativo próprio.
+- Software sob medida: soluções para necessidades específicas de cada negócio.
+
+## Projetos entregues
+
+- [Gi Cookies](https://gicookies.com.br): e-commerce de uma confeitaria artesanal de Porto Alegre, com catálogo por tema, sacola, cupons, pedido enviado pelo WhatsApp e painel administrativo próprio.
+- [Porthon](https://porthon.com.br): SaaS de gestão condominial (encomendas, moradores, veículos e funcionários), em produção.
+- 7 Planner: plataforma interna de gestão de recursos e agendamentos para um colégio, com chat de suporte em tempo real.
+- [Psicóloga Laura Bergamo](https://psilaurabergamo.com.br): site institucional sob medida com foco em SEO.
+
+## Perguntas frequentes
+
+- Quanto custa? Cada projeto é sob medida; o orçamento é gratuito e feito após entender a necessidade do cliente.
+- Quanto tempo leva? Um site institucional costuma levar algumas semanas; sistemas e e-commerces variam conforme as funcionalidades. Os prazos são definidos antes de iniciar.
+- Atendem outras cidades? Sim, atendimento remoto em todo o Brasil.
+- Usam construtores prontos? Não. Todo projeto é feito com código próprio, garantindo desempenho, segurança e liberdade para evoluir.
