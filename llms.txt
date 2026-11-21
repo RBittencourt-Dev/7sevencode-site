@@ -28,5 +28,7 @@
 
 - Quanto custa? Cada projeto é sob medida; o orçamento é gratuito e feito após entender a necessidade do cliente.
 - Quanto tempo leva? Um site institucional costuma levar algumas semanas; sistemas e e-commerces variam conforme as funcionalidades. Os prazos são definidos antes de iniciar.
+- Fazem contrato? Sim. Todo projeto é formalizado em contrato antes do início, com escopo, prazo e valor definidos.
+- Ajudam o site a aparecer em IAs como o ChatGPT? Sim. Usamos dados estruturados (schema.org), conteúdo organizado e llms.txt para que ferramentas como ChatGPT, Gemini e Perplexity entendam e citem o negócio. A recomendação não pode ser garantida, mas um site bem preparado aumenta as chances.
 - Atendem outras cidades? Sim, atendimento remoto em todo o Brasil.
 - Usam construtores prontos? Não. Todo projeto é feito com código próprio, garantindo desempenho, segurança e liberdade para evoluir.

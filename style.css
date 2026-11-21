@@ -1,33 +1,71 @@
 /* ============================================================
    7 SEVENCODE — ESTILOS
    Organização:
+   0. Tokens (as "variáveis" de cor, fonte e espaço do site todo)
    1. Base / Reset
-   2. Fundo (degradê estático)
+   2. Botões (um sistema só, usado no site inteiro)
    3. Navegação (desktop + mobile)
-   4. Seção Home
-   5. Seção Sobre
-   6. Seção Devs
-   7. Seção Projetos
-   8. Seção Contato
-   9. Rodapé
-   10. Animação de scroll
-   11. Modais
-   12. Responsividade (mobile)
+   4. Home (hero)
+   5. Seções: cabeçalho padrão
+   6. Sobre + Como funciona
+   7. Projetos
+   8. Equipe
+   9. FAQ
+   10. Contato
+   11. Rodapé
+   12. Acessibilidade + animação de scroll
+   13. Modais (reservado pro seu JS)
+   14. Responsividade
    ============================================================ */
 
-/* ===== 1. BASE / RESET ===== */
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+/* ===== 0. TOKENS =====
+   Design system em miniatura: toda cor, raio e espaço do site sai daqui.
+   Quer mudar o azul do site inteiro? Muda UMA linha. Isso é o que dá
+   aparência "profissional": as mesmas decisões repetidas em todo lugar. */
+:root {
+  /* Cores — escuro azulado (não preto puro) + o azul da marca */
+  --fundo: #0d141f;
+  --fundo-2: #111a27;
+  --superficie: #152030;
+  --linha: #22304a;
+  --linha-suave: rgba(233, 238, 244, 0.08);
 
-* {
+  --texto: #e9eef4;
+  --texto-2: #a6b3c3;
+  --texto-3: #7a889a;
+
+  --azul: #0479da; /* azul da marca, o mesmo do logo */
+  --azul-hover: #0a6cc4;
+  --azul-claro: #5cb5ff; /* para texto azul em fundo escuro (mais legível) */
+
+  /* Raios — tamanhos diferentes por hierarquia, não um só pra tudo */
+  --raio-p: 8px; /* botões, campos */
+  --raio-m: 14px; /* imagens, cards */
+  --raio-g: 24px; /* blocos grandes */
+
+  /* Layout */
+  --largura: 1200px;
+  --nav-h: 72px;
+  --lateral: clamp(1.25rem, 5vw, 3rem);
+  --secao-y: clamp(4.5rem, 10vw, 8rem);
+
+  --fonte: "Bricolage Grotesque", system-ui, sans-serif;
+}
+
+/* ===== 1. BASE / RESET ===== */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Space Grotesk", sans-serif;
 }
 
 html {
   width: 100%;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
 }
 
 body {
@@ -35,91 +73,163 @@ body {
   /* NOTA: nao colocar overflow-x aqui!
      Se html E body tiverem overflow-x: hidden, o navegador cria DUAS barras
      de rolagem sobrepostas (bug que travava o scroll). O overflow-x fica so no html. */
-  background-color: #17191f;
-  color: aliceblue;
+  background-color: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ===== 2. FUNDO (degradê azul estático, custo zero de performance) ===== */
-/* Camada fixa atrás de tudo — pintada uma vez, não recalcula ao rolar */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(circle at 12% 8%, rgba(4, 121, 218, 0.16), transparent 42%),
-    radial-gradient(circle at 88% 92%, rgba(4, 121, 218, 0.12), transparent 45%),
-    #17191f;
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* Largura máxima + margens laterais, igual em todas as seções */
+.secao,
+.home-container,
+.topo-nav,
+.footer-grid,
+.footer-copy {
+  width: min(100% - 2 * var(--lateral), var(--largura));
+  margin-inline: auto;
+}
+
+.secao {
+  padding-block: var(--secao-y);
+}
+
+/* ===== 2. BOTÕES =====
+   Regra de ouro: só UM botão "cheio" (primário) por área da tela.
+   O resto é secundário (contorno). Assim o olho sabe onde clicar. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 48px;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--raio-p);
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-primario {
+  background: var(--azul);
+  color: #fff;
+}
+
+.btn-primario:hover {
+  background: var(--azul-hover);
+}
+
+.btn-secundario {
+  border-color: var(--linha);
+  color: var(--texto);
+}
+
+.btn-secundario:hover {
+  border-color: var(--texto-3);
+  background: var(--linha-suave);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-grande {
+  min-height: 56px;
+  padding: 0.9rem 1.8rem;
+  font-size: 1.0625rem;
+}
+
+.btn-icone {
+  width: 1.2em;
+  height: 1.2em;
+  fill: currentColor;
+  flex-shrink: 0;
 }
 
 /* ===== 3. NAVEGAÇÃO ===== */
-nav {
+.topo {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 10vh;
+  inset: 0 0 auto 0;
+  height: var(--nav-h);
+  z-index: 99;
+  background: rgba(13, 20, 31, 0.82);
+  /* desfoca o que passa por baixo do menu (efeito vidro) */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--linha-suave);
+}
+
+.topo-nav {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(20, 22, 28, 0.95);
-  z-index: 99;
 }
 
-nav::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: #0479da;
+.topo-logo {
+  display: inline-flex;
+  padding-block: 0.6rem;
 }
 
 .logo7code {
-  width: 300px;
-  margin-left: 50px;
+  width: 168px;
 }
 
 .menu-desktop {
   display: flex;
-  gap: 2.2rem;
-  margin-right: 50px;
-  list-style: none;
   align-items: center;
-}
-
-.menu-desktop li {
-  position: relative;
-  padding-bottom: 6px;
+  gap: 0.25rem;
+  list-style: none;
 }
 
 .menu-desktop a {
-  color: aliceblue;
-  text-decoration: none;
-  font-size: 1rem;
+  display: inline-block;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--raio-p);
+  color: var(--texto-2);
+  font-size: 0.95rem;
   font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-desktop li:hover a,
+.menu-desktop li.active a {
+  color: var(--texto);
+}
+
+/* Barra azul embaixo do item: cresce do centro no hover e fica fixa no
+   item ativo (o script.js coloca a classe .active na seção da tela). */
+.menu-desktop li {
+  position: relative;
 }
 
 .menu-desktop li::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: -2px;
   height: 2px;
-  background-color: #0479da;
   border-radius: 2px;
+  background: var(--azul);
   transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s ease;
-}
-
-.menu-desktop li:hover a,
-.menu-desktop li.active a {
-  color: #0479da;
+  transition: transform 0.25s ease;
 }
 
 .menu-desktop li:hover::after,
@@ -128,12 +238,10 @@ nav::after {
 }
 
 /* ----- Botão "Entrar" (área interna da equipe) -----
-   Os outros itens do menu são links de âncora e usam o sublinhado que cresce.
-   Este é uma AÇÃO, e leva para fora do site — então vira pílula, no mesmo
-   desenho do .home-cta-button, para não parecer só mais um item da lista.
-   O ::after herdado é desligado: sublinhado somado à borda vira ruído. */
+   É uma AÇÃO que leva pra fora do site, então tem contorno — mas não é
+   azul cheio: o azul cheio fica reservado para "Pedir orçamento". */
 .menu-desktop li.nav-entrar {
-  padding-bottom: 0;
+  margin-left: 0.75rem;
 }
 
 .menu-desktop li.nav-entrar::after {
@@ -141,614 +249,755 @@ nav::after {
 }
 
 .menu-desktop li.nav-entrar a {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5rem 1.3rem;
-  border: 1px solid #0479da;
-  border-radius: 22px;
-  color: #0479da;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--linha);
+  color: var(--texto);
   font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.menu-desktop li.nav-entrar:hover a,
-.menu-desktop li.nav-entrar a:focus-visible {
-  background-color: #0479da;
-  color: aliceblue;
-  box-shadow: 0 0 16px rgba(4, 121, 218, 0.55);
+.menu-desktop li.nav-entrar:hover a {
+  border-color: var(--texto-3);
+  background: var(--linha-suave);
 }
 
 /* Menu do celular (escondido no desktop) */
-.btn-hamburguer {
-  display: none;
-}
-
+.btn-hamburguer,
 .menu-celular {
   display: none;
 }
 
-/* ===== 4. SEÇÃO HOME ===== */
+/* ===== 4. HOME (HERO) ===== */
 main {
-  margin-top: 10vh;
-}
-
-section {
-  min-height: 100vh;
-  scroll-margin-top: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding-top: var(--nav-h);
 }
 
 #home {
-  width: 100%;
-  min-height: 100vh;
-  justify-content: flex-start;
-  padding: clamp(3.5rem, 6vh, 6rem) clamp(2rem, 6vw, 5rem) 4rem;
+  position: relative;
   overflow: hidden;
+  border-bottom: 1px solid var(--linha-suave);
+}
+
+/* Fundo do hero: trilhas de circuito (o <svg class="home-circuito"> no HTML),
+   no mesmo traço do 7 do logo. Saem da borda direita, por trás das telas,
+   e somem suavemente para a esquerda (mask) pra não brigar com o texto. */
+.home-circuito {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: 0;
+  height: 100%;
+  min-height: 560px;
+  width: auto;
+  transform: translateY(-50%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+  pointer-events: none;
+}
+
+.home-circuito .trilha path {
+  stroke: #1f3653;
+  stroke-width: 1.5;
+}
+
+.home-circuito .trilha-ponto circle {
+  stroke: #2a4a72;
+  stroke-width: 1.5;
+  fill: var(--fundo);
+}
+
+.home-circuito .trilha-acesa {
+  stroke: var(--azul);
+  stroke-width: 1.5;
+  opacity: 0.8;
+}
+
+.home-circuito .trilha-acesa-ponto {
+  fill: var(--azul-claro);
+}
+
+/* Uma luz azul suave atrás das telas */
+#home::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 720px;
+  height: 720px;
+  right: -160px;
+  top: -120px;
+  background: radial-gradient(circle, rgba(4, 121, 218, 0.22), transparent 62%);
+  pointer-events: none;
 }
 
 .home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  width: min(100%, 920px);
-  gap: 1rem;
-  margin-left: clamp(1rem, 3vw, 2rem);
-}
-
-.home-logos {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
   align-items: center;
-  gap: clamp(0.6rem, 1.8vw, 1rem);
-  margin-top: -5rem;
-}
-
-.logo-7 {
-  width: clamp(150px, 25vw, 235px);
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
-}
-
-.code {
-  position: relative;
-  right: 5%;
-  width: clamp(180px, 31vw, 295px);
-  filter: drop-shadow(0 0 10px rgba(192, 192, 192, 0.8));
+  gap: clamp(2rem, 5vw, 4.5rem);
+  min-height: calc(100svh - var(--nav-h));
+  padding-block: clamp(3.5rem, 8vw, 6rem);
 }
 
 .home-texts {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  max-width: 820px;
+  align-items: flex-start;
+}
+
+.home-local {
+  color: var(--azul-claro);
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 h1 {
-  font-size: clamp(2rem, 3.6vw, 3.4rem);
-  font-weight: 700;
-  line-height: 1.12;
+  margin-top: 1.4rem;
+  font-size: clamp(2.3rem, 4.8vw, 3.9rem);
+  font-weight: 650;
+  font-variation-settings: "opsz" 72;
+  line-height: 1.06;
   letter-spacing: -0.02em;
-  white-space: nowrap;
+  text-wrap: balance;
+  max-width: 16ch;
 }
 
-hr {
-  background: linear-gradient(90deg, #0479da 0%, #4fb2ff 100%);
-  border: none;
-  height: 2px;
-  width: min(100%, 440px);
-  margin-top: 0.2rem;
-  border-radius: 999px;
-}
-
-h2 {
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-  line-height: 1.7;
-  max-width: 760px;
-  color: rgba(240, 248, 255, 0.9);
+.home-lead {
+  margin-top: 1.4rem;
+  max-width: 34rem;
+  color: var(--texto-2);
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
 }
 
 .home-cta-buttons {
   display: flex;
-  gap: 50px;
-  width: 75%;
-  margin-top: 10px;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2.2rem;
 }
 
-.home-cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #0479da;
-  box-shadow: 0 0 16px #0479da;
-  padding: 1rem 1.5rem;
-  width: min(100%, 320px);
-  font-size: clamp(1rem, 2vw, 1.35rem);
-  border-radius: 26px;
-  cursor: pointer;
-  color: white;
-  text-decoration: none;
-  transition: 0.5s;
+/* Vitrine: duas telas de projetos reais sobrepostas */
+.home-vitrine {
+  position: relative;
+  aspect-ratio: 1 / 0.86;
 }
 
-.home-cta-button:hover {
-  background: rgba(23, 25, 31, 1);
-  transform: scale(1.02);
+.home-vitrine img {
+  position: absolute;
+  width: 84%;
+  border-radius: var(--raio-m);
+  border: 1px solid var(--linha);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
 }
 
-/* ===== 5. SEÇÃO SOBRE ===== */
-#sobre {
-  width: 100%;
-  padding: 5rem 2.5rem;
+.vitrine-tras {
+  top: 0;
+  right: 0;
+  opacity: 0.75;
 }
 
-.container-sobre {
-  width: min(100%, 1280px);
-  padding: clamp(2.5rem, 4.5vw, 4rem);
-  background: rgba(30, 32, 40, 0.55);
-  border-radius: 32px;
+.vitrine-frente {
+  bottom: 0;
+  left: 0;
 }
 
-.container-sobre h3 {
-  font-size: clamp(2.4rem, 3.4vw, 3.6rem);
+/* ===== 5. CABEÇALHO PADRÃO DAS SEÇÕES ===== */
+.secao-cabecalho {
+  max-width: 40rem;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.secao-titulo {
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 650;
+  font-variation-settings: "opsz" 72;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.secao-subtitulo {
+  margin-top: 0.8rem;
+  color: var(--texto-2);
+  font-size: 1.125rem;
+}
+
+.secao-subtitulo a {
+  color: var(--azul-claro);
+  text-underline-offset: 3px;
+}
+
+/* ===== 5b. POR QUE TER UM SITE =====
+   Sem cards: cada motivo é texto com um traço azul curto em cima, ligado a
+   uma linha fina que atravessa a fileira (lembra a trilha de circuito). */
+.motivos-lista {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  list-style: none;
+}
+
+.motivo {
+  position: relative;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--linha);
+}
+
+.motivo::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--azul);
+}
+
+.motivo h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.motivo p {
+  margin-top: 0.7rem;
+  color: var(--texto-2);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* ===== 6. SOBRE + COMO FUNCIONA ===== */
+.sobre-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.sobre-texto p {
+  margin-top: 1.25rem;
+  max-width: 36rem;
+  color: var(--texto-2);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.sobre-texto p:first-of-type {
+  margin-top: 1.6rem;
+  color: var(--texto);
+}
+
+.sobre-processo {
+  padding: clamp(1.6rem, 3vw, 2.2rem);
+  background: var(--fundo-2);
+  border: 1px solid var(--linha-suave);
+  border-radius: var(--raio-g);
+}
+
+.sobre-processo h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--texto-2);
+}
+
+/* Lista numerada com contador do CSS: o número sai sozinho (1, 2, 3, 4)
+   e uma linha vertical liga as etapas, como uma trilha de circuito. */
+.processo-lista {
+  list-style: none;
+  counter-reset: etapa;
+  margin-top: 1.4rem;
+}
+
+.processo-lista li {
+  position: relative;
+  counter-increment: etapa;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0 0 1.6rem 3.1rem;
+}
+
+.processo-lista li:last-child {
+  padding-bottom: 0;
+}
+
+.processo-lista li::before {
+  content: counter(etapa);
+  position: absolute;
+  left: 0;
+  top: -0.1rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--azul);
+  background: var(--fundo-2);
+  color: var(--azul-claro);
+  font-size: 0.875rem;
   font-weight: 600;
 }
 
-.container-sobre p {
-  margin-top: 20px;
-  font-size: clamp(1.15rem, 1.9vw, 2rem);
-  line-height: 1.8;
+.processo-lista li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(1rem - 0.5px);
+  top: 2rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--linha);
 }
 
-/* ===== 6. SEÇÃO DEVS ===== */
-#devs {
-  width: 100%;
-  flex-direction: column;
-  padding: 4rem 2rem 3rem;
-  gap: 2rem;
+.processo-lista strong {
+  font-weight: 600;
+  font-size: 1.0625rem;
 }
 
-.devs-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.3rem;
+.processo-lista span {
+  color: var(--texto-2);
+  font-size: 0.975rem;
+  line-height: 1.55;
 }
 
-.devs-header h3 {
-  font-size: clamp(2rem, 3vw, 2.7rem);
-  font-weight: 700;
-}
-
-.devs-subtitle {
-  color: #0479da;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.devs-lista {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  width: 100%;
-}
-
-.dev {
-  flex: 1 1 min(320px, 100%);
-  max-width: 360px;
-  padding: clamp(1.5rem, 3vw, 3rem);
-  background: rgba(19, 19, 19, 0.9);
-  border-radius: 25px;
-  text-align: center;
-  transition: transform 0.5s ease;
-}
-
-.dev:hover {
-  transform: translateY(-3%);
-}
-
-.dev-foto {
-  width: min(240px, 70vw);
-  height: min(240px, 70vw);
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.dev h4 {
-  margin-top: 30px;
-  font-size: clamp(1.3rem, 2vw, 1.7rem);
-  font-weight: 700;
-}
-
-.dev p {
-  margin-top: 4px;
-}
-
-.dev-cargo {
-  display: inline-block;
-  margin-top: 12px;
-  font-weight: 300;
-  color: #0479da;
-}
-
-/* ===== 7. SEÇÃO PROJETOS ===== */
-#projetos {
-  width: 100%;
-  flex-direction: column;
-  padding: 4rem 2rem 3rem;
-  gap: 2rem;
-}
-
-.projetos-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 0.3rem;
-}
-
-.projetos-header h3 {
-  font-size: clamp(2rem, 3vw, 2.7rem);
-  font-weight: 700;
-}
-
-.projetos-subtitle {
-  color: #0479da;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
+/* ===== 7. PROJETOS =====
+   Em vez de 4 cards pequenos iguais, cada projeto ganha uma linha inteira
+   com a imagem grande. Os pares invertem o lado, pra dar ritmo. */
 .projetos-lista {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: clamp(1.5rem, 3vw, 3rem);
-  width: 100%;
+  flex-direction: column;
+  gap: clamp(3.5rem, 8vw, 6rem);
 }
 
 .projeto {
-  flex: 1 1 min(340px, 100%);
-  max-width: 390px;
-  min-height: 430px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035));
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 24px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
-  overflow: hidden;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: center;
+  gap: clamp(1.75rem, 5vw, 4rem);
 }
 
-.projeto:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 45px rgba(4, 121, 218, 0.2);
+.projeto:nth-child(even) .projeto-image {
+  order: 2;
 }
 
 .projeto-image {
-  width: 100%;
-  height: 220px;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--raio-m);
+  border: 1px solid var(--linha);
+  background: var(--fundo-2);
 }
 
 .projeto-image img {
   width: 100%;
-  height: 100%;
-  display: block;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (hover: hover) {
+  .projeto:hover .projeto-image img {
+    transform: scale(1.025);
+  }
 }
 
 .projeto-content {
-  padding: 1.4rem 1.35rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  align-items: flex-start;
 }
 
-.projeto-content h4 {
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
-  font-weight: 700;
+.projeto-tipo {
+  color: var(--azul-claro);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.projeto-content h3 {
+  margin-top: 0.5rem;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 .projeto-content p {
-  color: rgba(240, 248, 255, 0.82);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-
-.projeto-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 0.2rem;
-}
-
-.tag-software,
-.tag-pessoal {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.42rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.tag-software {
-  background: rgba(4, 121, 218, 0.18);
-  color: #8fd2ff;
-  border: 1px solid rgba(79, 178, 255, 0.3);
-}
-
-.tag-pessoal {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(240, 248, 255, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-/* Só os links (a.tag-pessoal) ganham hover — os spans não são clicáveis */
-a.tag-pessoal {
-  transition: background 0.3s, border-color 0.3s, color 0.3s;
-}
-
-a.tag-pessoal:hover,
-a.tag-pessoal:focus-visible {
-  background: rgba(4, 121, 218, 0.18);
-  border-color: rgba(79, 178, 255, 0.45);
-  color: #8fd2ff;
-}
-
-.btn-projeto {
-  width: 100%;
-  padding: 10px 5px;
-  border: none;
-  border-radius: 7px;
-  background: #0479da;
-  box-shadow: 0 0 3px rgba(79, 178, 255, 1);
-  color: white;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.btn-projeto:hover {
-  background: rgba(4, 121, 218, 0.18);
-}
-
-/* ===== 8. SEÇÃO CONTATO ===== */
-#contato {
-  width: 100%;
-  padding: 5rem 2.5rem 4rem;
-}
-
-.contato-container {
-  width: min(100%, 1100px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3.5rem;
-}
-
-.contato-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1rem;
-}
-
-.contato-header h3 {
-  font-size: clamp(2rem, 3.2vw, 3rem);
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.contato-subtitle {
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  color: rgba(240, 248, 255, 0.85);
-  max-width: 550px;
-  line-height: 1.6;
-}
-
-.contato-cta-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  width: 100%;
-  padding: 3rem;
-  background: rgba(30, 32, 40, 0.55);
-  border: 1px solid rgba(79, 178, 255, 0.25);
-  border-radius: 28px;
-}
-
-.contato-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1rem;
-}
-
-.contato-message h2 {
-  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.impacto-text {
-  font-size: 1.05rem;
-  color: rgba(240, 248, 255, 0.85);
-  max-width: 600px;
+  margin-top: 0.9rem;
+  max-width: 32rem;
+  color: var(--texto-2);
   line-height: 1.7;
-  font-weight: 500;
 }
 
-.btn-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.1rem 2.5rem;
-  background: #0479da;
-  color: white;
-  text-decoration: none;
-  border-radius: 26px;
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
+.projeto-link {
+  margin-top: 0.9rem;
+  padding-block: 0.6rem;
+  color: var(--texto);
   font-weight: 600;
-  box-shadow: 0 0 16px #0479da;
-  transition: all 0.4s ease;
+  text-decoration: underline;
+  text-decoration-color: var(--azul);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
-.btn-whatsapp:hover {
-  background: rgba(23, 25, 31, 1);
-  transform: scale(1.02);
-  box-shadow: 0 0 25px #0479da;
+.projeto-link:hover {
+  color: var(--azul-claro);
+  text-decoration-color: var(--azul-claro);
 }
 
-.btn-whatsapp:active {
-  transform: scale(0.98);
+.projeto-privado {
+  margin-top: 1.4rem;
+  color: var(--texto-3);
+  font-size: 0.95rem;
 }
 
-/* ===== 9. RODAPÉ ===== */
-.site-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: 2rem 1rem 1.5rem;
-}
-
-.site-footer img {
-  width: 130px;
-}
-
-.site-footer p {
-  color: #4f4f4f;
-  font-size: 10px;
-  line-height: 1.2;
-  opacity: 0.42;
-}
-
-/* ===== LINHA DE CONFIANÇA (contato) ===== */
-.contato-trust {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.6rem 1.6rem;
-  list-style: none;
-  margin-top: 0.5rem;
-}
-
-.contato-trust li {
-  position: relative;
-  padding-left: 1.4rem;
-  font-size: 0.92rem;
-  color: rgba(240, 248, 255, 0.8);
-}
-
-.contato-trust li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #4fb2ff;
-  font-weight: 700;
-}
-
-/* ===== SEÇÃO FAQ ===== */
-#faq {
-  width: 100%;
-  flex-direction: column;
-  padding: 5rem 2rem;
-}
-
-.faq-container {
-  width: min(100%, 860px);
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.faq-header {
+/* ===== 8. EQUIPE =====
+   Cards centralizados com foto redonda (o formato original da equipe).
+   ATENÇÃO: o script.js monta estes cards a partir do painel, com
+   .dev > .dev-foto + h4 + p + .dev-cargo. Não mude esses nomes sem mudar lá. */
+/* Título centralizado, alinhado com os cards */
+#devs .secao-cabecalho {
+  margin-inline: auto;
   text-align: center;
 }
 
-.faq-header h3 {
-  font-size: clamp(2rem, 3vw, 2.7rem);
-  font-weight: 700;
+.devs-lista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(1.25rem, 3vw, 2rem);
 }
 
-.faq-subtitle {
-  margin-top: 0.3rem;
-  color: #0479da;
-  font-size: 1rem;
+.dev {
+  flex: 1 1 260px;
+  max-width: 320px;
+  padding: clamp(1.75rem, 3vw, 2.5rem) 1.5rem;
+  background: var(--fundo-2);
+  border: 1px solid var(--linha-suave);
+  border-radius: var(--raio-g);
+  text-align: center;
+  transition: border-color 0.25s ease;
+}
+
+.dev:hover {
+  border-color: var(--linha);
+}
+
+.dev-foto {
+  width: min(180px, 60vw);
+  height: min(180px, 60vw);
+  margin-inline: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 25%;
+  border: 1px solid var(--linha);
+  background: var(--superficie);
+}
+
+.dev h4 {
+  margin-top: 1.4rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.dev p {
+  margin-top: 0.2rem;
+  color: var(--texto-2);
+  font-size: 0.975rem;
+}
+
+.dev-cargo {
+  display: inline-block;
+  margin-top: 0.9rem;
+  padding: 0.2rem 0.8rem;
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  color: var(--azul-claro);
+  font-size: 0.85rem;
   font-weight: 500;
+}
+
+/* ===== 9. FAQ ===== */
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+/* O título fica "grudado" enquanto a lista rola ao lado */
+.faq-header {
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
 }
 
 .faq-lista {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  border-top: 1px solid var(--linha);
 }
 
 .faq-item {
-  background: rgba(30, 32, 40, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  overflow: hidden;
+  border-bottom: 1px solid var(--linha);
 }
 
 .faq-item summary {
-  padding: 1.15rem 1.4rem;
-  cursor: pointer;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: aliceblue;
-  list-style: none; /* remove a setinha padrão */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 1.35rem 0;
+  cursor: pointer;
+  font-size: 1.125rem;
+  font-weight: 600;
+  list-style: none; /* remove a setinha padrão */
+  transition: color 0.2s ease;
+}
+
+.faq-item summary:hover {
+  color: var(--azul-claro);
 }
 
 .faq-item summary::-webkit-details-marker {
   display: none;
 }
 
-/* Seta "+" que vira "−" ao abrir */
+/* "+" que gira e vira "×" ao abrir */
 .faq-item summary::after {
   content: "+";
-  color: #4fb2ff;
-  font-size: 1.5rem;
-  font-weight: 700;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--linha);
+  border-radius: 50%;
+  color: var(--texto-2);
+  font-size: 1.25rem;
+  font-weight: 400;
   line-height: 1;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.2s ease;
 }
 
 .faq-item[open] summary::after {
-  content: "−";
+  transform: rotate(45deg);
+  border-color: var(--azul);
 }
 
 .faq-item p {
-  padding: 0 1.4rem 1.25rem;
-  color: rgba(240, 248, 255, 0.82);
+  padding: 0 3rem 1.5rem 0;
+  max-width: 40rem;
+  color: var(--texto-2);
   line-height: 1.7;
 }
 
-/* ===== ACESSIBILIDADE ===== */
+/* ===== 10. CONTATO ===== */
+.contato-painel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2.5rem, 6vw, 5rem);
+  background:
+    radial-gradient(ellipse 60% 90% at 100% 50%, rgba(4, 121, 218, 0.18), transparent 70%),
+    var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-g);
+}
+
+/* O 7 de circuito, grande e apagado, como assinatura */
+.contato-marca {
+  position: absolute;
+  right: clamp(-4rem, -2vw, 0rem);
+  top: 50%;
+  width: clamp(240px, 32vw, 420px);
+  transform: translateY(-50%);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.contato-texto {
+  position: relative;
+  max-width: 38rem;
+}
+
+.contato-texto h2 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 650;
+  font-variation-settings: "opsz" 96;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.contato-texto > p {
+  margin-top: 1.1rem;
+  color: var(--texto-2);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.contato-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.contato-telefone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--texto-2);
+  font-weight: 500;
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+
+.contato-telefone:hover {
+  color: var(--texto);
+}
+
+.contato-trust {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 2.2rem;
+  list-style: none;
+}
+
+.contato-trust li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: var(--texto-2);
+  font-size: 0.975rem;
+}
+
+/* Check desenhado com bordas (sem emoji, sem ícone externo) */
+.contato-trust li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 0.35em;
+  width: 0.4rem;
+  height: 0.7rem;
+  border: solid var(--azul-claro);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ===== 11. RODAPÉ ===== */
+.site-footer {
+  border-top: 1px solid var(--linha-suave);
+  padding-block: 3.5rem 2rem;
+  margin-top: var(--secao-y);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.footer-marca img {
+  width: 160px;
+}
+
+.footer-marca p {
+  margin-top: 1rem;
+  max-width: 22rem;
+  color: var(--texto-3);
+  font-size: 0.95rem;
+}
+
+.footer-coluna {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  font-size: 0.95rem;
+}
+
+.footer-coluna h2 {
+  margin-bottom: 0.35rem;
+  color: var(--texto);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.footer-coluna a,
+.footer-coluna p {
+  color: var(--texto-3);
+  text-decoration: none;
+}
+
+.footer-coluna a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.footer-coluna a:hover {
+  color: var(--texto);
+}
+
+.footer-copy {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--linha-suave);
+  color: var(--texto-3);
+  font-size: 0.85rem;
+}
+
+/* ===== BOTÃO FLUTUANTE DO WHATSAPP (só aparece no celular) ===== */
+.whats-flutuante {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 90;
+  display: none;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--azul);
+  color: #fff;
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.6);
+}
+
+.whats-flutuante svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+/* ===== 12. ACESSIBILIDADE + ANIMAÇÃO DE SCROLL ===== */
 /* Contorno visível ao navegar por teclado (Tab) */
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 2px solid #4fb2ff;
+  outline: 2px solid var(--azul-claro);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: var(--raio-p);
+}
+
+/* Seções surgem ao rolar (o script.js coloca a classe .visivel).
+   Movimento curto (16px): elegante, não chama mais atenção que o conteúdo. */
+.surgir-ao-scroll {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.surgir-ao-scroll.visivel {
+  opacity: 1;
+  transform: none;
 }
 
 /* Respeita quem prefere menos animação (config do sistema) */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
@@ -758,32 +1007,15 @@ summary:focus-visible {
   }
 }
 
-/* Imagens nunca estouram a largura E mantêm a proporção (height: auto evita esticar) */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* ===== 10. ANIMAÇÃO DE SCROLL ===== */
-.surgir-ao-scroll {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: opacity 0.8s ease-out, transform 1s ease-out;
-}
-
-.surgir-ao-scroll.visivel {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== 11. MODAIS ===== */
+/* ===== 13. MODAIS =====
+   (Reservado pra você fazer os modais dos projetos em JS quando for treinar.) */
 .modal-overlay {
   position: fixed;
   inset: 0;
   display: none;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(5, 9, 15, 0.8);
   z-index: 1000;
   padding: 1.5rem;
 }
@@ -794,20 +1026,19 @@ img {
 
 .modal-conteudo {
   position: relative;
-  width: 90%;
-  max-width: 520px;
+  width: 100%;
+  max-width: 720px;
   max-height: 90vh;
   overflow-y: auto;
-  padding: 30px;
-  background-color: #161b22;
-  color: white;
-  border: 1px solid rgba(79, 178, 255, 0.25);
-  border-radius: 12px;
+  padding: 2rem;
+  background-color: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-g);
 }
 
 .modal-img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: var(--raio-m);
   margin-bottom: 1rem;
 }
 
@@ -817,7 +1048,7 @@ img {
 
 .modal-conteudo p {
   line-height: 1.7;
-  color: rgba(240, 248, 255, 0.85);
+  color: var(--texto-2);
 }
 
 .btn-fechar {
@@ -826,88 +1057,92 @@ img {
   right: 15px;
   background: none;
   border: none;
-  color: white;
+  color: var(--texto);
   font-size: 26px;
   line-height: 1;
   cursor: pointer;
 }
 
-/* ===== 12a. RESPONSIVIDADE - TABLET / TELAS MÉDIAS ===== */
-/* Evita o h1 estourar a largura em telas médias */
-@media (max-width: 1200px) {
-  h1 {
-    white-space: normal;
-  }
-}
-
-/* Faixa entre celular e desktop: aperta o menu e ajusta o hero */
-@media (max-width: 1024px) and (min-width: 875px) {
-  .logo7code {
-    width: 230px;
-    margin-left: 24px;
-  }
-
-  .menu-desktop {
-    gap: 1.4rem;
-    margin-right: 24px;
+/* ===== 14. RESPONSIVIDADE ===== */
+/* Tablet: menos espaço entre itens do menu */
+@media (max-width: 1024px) {
+  .motivos-lista {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2.5rem;
   }
 
   .menu-desktop a {
-    font-size: 0.95rem;
+    padding-inline: 0.6rem;
   }
 
-  #home {
-    padding: 5rem 2rem 3rem;
-  }
-
-  .home-logos {
-    margin-top: -2rem;
+  .menu-desktop li::after {
+    left: 0.6rem;
+    right: 0.6rem;
   }
 }
 
-/* ===== 12b. RESPONSIVIDADE (MOBILE) ===== */
-@media (max-width: 874px) {
-  .logo7code {
-    display: block;
-    width: 200px;
-    margin: 0 auto;
+/* Abaixo de 900px o hero vira uma coluna só (texto em cima, telas embaixo) */
+@media (max-width: 900px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    min-height: auto;
   }
 
+  .home-vitrine {
+    max-width: 620px;
+    width: 100%;
+  }
+}
+
+/* Celular */
+@media (max-width: 874px) {
   .menu-desktop {
     display: none;
   }
 
-  /* Botão hamburguer no canto superior direito, ACIMA da barra (z-index maior) */
+  .logo7code {
+    width: 150px;
+  }
+
   .btn-hamburguer {
     position: fixed;
     top: 0;
-    right: 10px;
+    right: calc(var(--lateral) - 12px);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 10vh;
+    width: 48px;
+    height: var(--nav-h);
     background: transparent;
     border: none;
-    color: white;
-    font-size: 26px;
+    color: var(--texto);
+    font-size: 24px;
     cursor: pointer;
     z-index: 100;
+  }
+
+  /* Quando o menu está aberto (aria-expanded="true", o script.js já
+     controla isso), o ☰ vira ✕ — só com CSS. */
+  .btn-hamburguer[aria-expanded="true"] {
+    font-size: 0;
+  }
+
+  .btn-hamburguer[aria-expanded="true"]::after {
+    content: "✕";
+    font-size: 22px;
   }
 
   /* Menu desce logo abaixo da barra fixa */
   .menu-celular {
     position: fixed;
-    top: 10vh;
+    top: var(--nav-h);
     left: 0;
     display: none;
     width: 100%;
-    padding: 2rem 0;
+    padding: 0.75rem var(--lateral) 1.5rem;
     flex-direction: column;
-    align-items: center;
-    gap: 28px;
-    background-color: rgba(20, 22, 28, 0.98);
-    border-bottom: 2px solid #0479da;
+    background-color: var(--fundo);
+    border-bottom: 1px solid var(--linha);
     z-index: 95;
   }
 
@@ -916,160 +1151,98 @@ img {
   }
 
   .menu-celular a {
-    color: white;
-    text-decoration: none;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--linha-suave);
+    color: var(--texto);
+    font-size: 1.125rem;
     font-weight: 500;
+    text-decoration: none;
   }
 
-  .menu-celular a:hover {
-    color: #0479da;
-  }
-
-  /* O "Entrar" mantém a forma de pílula também no celular: é a única ação
-     desta lista, e no desktop ela já se distingue assim. */
   .menu-celular a.entrar-celular {
-    margin-top: 4px;
-    padding: 0.55rem 1.6rem;
-    border: 1px solid #0479da;
-    border-radius: 22px;
-    color: #0479da;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border: 1px solid var(--linha);
+    border-radius: var(--raio-p);
+    text-align: center;
     font-weight: 600;
   }
 
-  .menu-celular a.entrar-celular:hover {
-    background-color: #0479da;
-    color: aliceblue;
-  }
-
-  #home {
-    align-items: center;
-    justify-content: center;
-    padding: 6rem 1.25rem 3rem;
-  }
-
-  .home-container {
-    align-items: center;
-    width: 100%;
-    text-align: center;
-    margin-left: 0;
-  }
-
-  .home-texts {
-    align-items: center;
-  }
-
-  .home-logos {
-    justify-content: center;
-    gap: 0.3rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .logo-7 {
-    width: 110px;
-  }
-
-  .code {
-    width: 155px;
-  }
-
   h1 {
-    font-size: clamp(1.2rem, 5.2vw, 1.8rem);
-    line-height: 1.15;
-    white-space: normal;
-  }
-
-  h2 {
-    font-size: 0.92rem;
-    line-height: 1.45;
-  }
-
-  hr {
-    width: min(80%, 280px);
-    margin: 0.25rem auto 0;
-  }
-
-  .home-cta-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  .home-cta-button {
-    width: min(100%, 260px);
-    padding: 0.9rem 1.1rem;
-    font-size: 0.95rem;
-  }
-
-  #sobre,
-  #devs,
-  #projetos,
-  #contato {
-    min-height: auto;
-    padding: 5rem 1.25rem 3rem;
-  }
-
-  .container-sobre {
-    padding: 1.5rem;
-  }
-
-  .container-sobre h3 {
-    font-size: 1.8rem;
-  }
-
-  .container-sobre p {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  .devs-header h3,
-  .projetos-header h3 {
-    font-size: 1.8rem;
-  }
-
-  .devs-lista,
-  .projetos-lista {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .dev {
     max-width: none;
   }
 
-  .dev-foto {
-    width: 180px;
-    height: 180px;
+  /* No celular as trilhas ficam atrás do texto: mais apagadas */
+  .home-circuito {
+    opacity: 0.45;
   }
 
-  .contato-cta-section {
-    padding: 2rem;
-    gap: 1.5rem;
+  .home-cta-buttons .btn {
+    flex: 1 1 200px;
   }
 
-  .contato-message h2 {
-    font-size: 1.6rem;
+  .sobre-grid,
+  .faq-grid,
+  .projeto {
+    grid-template-columns: 1fr;
   }
 
-  .btn-whatsapp {
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
+  .motivos-lista {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
   }
 
-  #faq {
-    padding: 4rem 1.25rem 3rem;
+  .projeto:nth-child(even) .projeto-image {
+    order: 0;
   }
 
-  .faq-header h3 {
-    font-size: 1.8rem;
-  }
-
-  .faq-item summary {
-    font-size: 0.98rem;
-    padding: 1rem 1.1rem;
+  .faq-header {
+    position: static;
   }
 
   .faq-item p {
-    padding: 0 1.1rem 1.1rem;
+    padding-right: 0;
+  }
+
+  .contato-painel {
+    padding: 2.25rem 1.25rem;
+  }
+
+  /* No celular o 7 vai pro canto de cima e fica bem apagado,
+     pra não passar por cima dos textos */
+  .contato-marca {
+    top: -2.5rem;
+    right: -2.5rem;
+    width: 170px;
+    transform: none;
+    opacity: 0.07;
+  }
+
+  .contato-acoes {
+    gap: 0.5rem;
+  }
+
+  .contato-acoes .btn {
+    padding-inline: 1rem;
+  }
+
+  /* Botão flutuante do WhatsApp: no celular a página é longa, e o
+     orçamento fica sempre a um toque, em qualquer seção. */
+  .whats-flutuante {
+    display: grid;
+  }
+
+  .contato-acoes .btn {
+    width: 100%;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* espaço pro botão flutuante não cobrir o fim do rodapé */
+  .site-footer {
+    padding-bottom: 6rem;
   }
 }

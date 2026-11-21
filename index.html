@@ -16,7 +16,7 @@
     />
     <meta name="author" content="7 SevenCode" />
     <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#0479da" />
+    <meta name="theme-color" content="#0d141f" />
     <link rel="canonical" href="https://7sevencode.com.br/" />
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icon-192.png" />
     <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
@@ -51,7 +51,15 @@
     />
     <meta name="twitter:image" content="https://7sevencode.com.br/assets/img/og-image.png" />
 
-    <link rel="stylesheet" href="style.css" />
+    <!-- Fonte: Bricolage Grotesque (títulos e texto). preconnect = o navegador já
+         abre a conexão com o Google Fonts antes de precisar, carregando mais rápido. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap"
+    />
+    <link rel="stylesheet" href="style.css?v=7" />
 
     <!-- ==================== DADOS ESTRUTURADOS (SEO / AEO / GEO) ==================== -->
     <!-- Ajuda o Google e as IAs (ChatGPT, Perplexity, AI Overviews) a entenderem a empresa -->
@@ -92,7 +100,8 @@
               "SaaS",
               "E-commerce",
               "Software sob medida",
-              "SEO"
+              "SEO",
+              "Otimização para buscas com IA (GEO)"
             ],
             "contactPoint": {
               "@type": "ContactPoint",
@@ -166,6 +175,14 @@
               },
               {
                 "@type": "Question",
+                "name": "Vocês fazem contrato?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sim. Todo projeto é formalizado em contrato antes do início, com escopo, prazo e valor definidos. Assim você sabe exatamente o que será entregue e quando."
+                }
+              },
+              {
+                "@type": "Question",
                 "name": "Vocês desenvolvem sistemas sob medida?",
                 "acceptedAnswer": {
                   "@type": "Answer",
@@ -182,6 +199,14 @@
               },
               {
                 "@type": "Question",
+                "name": "Vocês ajudam o site a aparecer em IAs como o ChatGPT?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sim. Estruturamos o site com dados estruturados (schema.org), conteúdo organizado e o arquivo llms.txt, que ajudam ferramentas como ChatGPT, Gemini e Perplexity a entender e citar o seu negócio. Nenhuma empresa consegue garantir a recomendação, mas um site bem preparado aumenta as chances."
+                }
+              },
+              {
+                "@type": "Question",
                 "name": "Vocês atendem clientes de outras cidades?",
                 "acceptedAnswer": {
                   "@type": "Answer",
@@ -194,25 +219,25 @@
       }
     </script>
   </head>
-
   <body>
     <!-- ==================== NAVEGAÇÃO ==================== -->
-    <header>
-      <nav aria-label="Menu principal">
-        <img
-          class="logo7code"
-          src="./assets/img/logo-nav.webp"
-          alt="7 SevenCode - software house"
-          width="300"
-          height="56"
-        />
+    <header class="topo">
+      <nav class="topo-nav" aria-label="Menu principal">
+        <a class="topo-logo" href="#home" aria-label="7 SevenCode, voltar ao início">
+          <img
+            class="logo7code"
+            src="./assets/img/logo-nav.webp"
+            alt="7 SevenCode - software house"
+            width="300"
+            height="56"
+          />
+        </a>
 
         <ul class="menu-desktop">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#sobre">Sobre Nós</a></li>
-          <li><a href="#devs">Equipe</a></li>
+          <li><a href="#sobre">Sobre</a></li>
           <li><a href="#projetos">Projetos</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#devs">Equipe</a></li>
+          <li><a href="#faq">Dúvidas</a></li>
           <li><a href="#contato">Contato</a></li>
           <!-- Área interna da equipe. Mora em outro lugar — uma aplicação com
                servidor, porque este site é estático e não guarda segredo. Por
@@ -228,11 +253,10 @@
         ☰
       </button>
       <div class="menu-celular">
-        <a href="#home">Home</a>
-        <a href="#sobre">Sobre Nós</a>
-        <a href="#devs">Equipe</a>
+        <a href="#sobre">Sobre</a>
         <a href="#projetos">Projetos</a>
-        <a href="#faq">FAQ</a>
+        <a href="#devs">Equipe</a>
+        <a href="#faq">Dúvidas</a>
         <a href="#contato">Contato</a>
         <a class="entrar-celular" href="https://painel.7sevencode.com.br" rel="noopener">Entrar</a>
       </div>
@@ -240,75 +264,297 @@
 
     <main>
       <!-- ==================== HOME ==================== -->
+      <!-- O lado direito do hero mostra TRABALHO DE VERDADE (mockups dos
+           projetos no ar), e não o logo de novo — o logo já está no menu.
+           Para quem visita pela primeira vez, prova vale mais que promessa. -->
       <section id="home">
+        <!-- Trilhas de circuito desenhadas à mão em SVG, no mesmo traço do 7 do
+             logo. É só decoração: aria-hidden esconde dos leitores de tela. -->
+        <svg class="home-circuito" viewBox="0 0 800 640" fill="none" aria-hidden="true" focusable="false">
+          <g class="trilha">
+            <path d="M800 70H580L540 110H430" />
+            <path d="M800 150H620L580 190V270L540 310H470" />
+            <path d="M800 250H710L690 270H650" />
+            <path d="M720 0V40L690 70" />
+            <path d="M800 360H660L620 400V500" />
+            <path d="M800 540H590L550 500H400" />
+            <path d="M800 600H700L660 640" />
+            <path d="M760 640V580L740 560H690" />
+          </g>
+          <g class="trilha-ponto">
+            <circle cx="430" cy="110" r="4.5" />
+            <circle cx="470" cy="310" r="4.5" />
+            <circle cx="650" cy="270" r="4.5" />
+            <circle cx="620" cy="500" r="4.5" />
+            <circle cx="690" cy="560" r="4.5" />
+          </g>
+          <!-- Uma única trilha "acesa" no azul da marca -->
+          <path class="trilha-acesa" d="M800 540H590L550 500H400" />
+          <circle class="trilha-acesa-ponto" cx="400" cy="500" r="5" />
+        </svg>
         <div class="home-container">
-          <div class="home-logos">
-            <img
-              class="logo-7"
-              src="./assets/img/logo-7.webp"
-              alt="Símbolo 7 da 7 SevenCode"
-              width="240"
-              height="240"
-            />
-            <img
-              class="code"
-              src="./assets/img/logo-code.webp"
-              alt="Code, parte do logotipo da 7 SevenCode"
-              width="295"
-              height="295"
-            />
-          </div>
-
           <div class="home-texts">
-            <h1>
-              Desenvolvimento de Softwares e Sites <br />
-              Sob Medida para o Seu Negócio
-            </h1>
+            <p class="home-local">Software house em Porto Alegre, RS</p>
 
-            <hr />
+            <h1>Desenvolvimento de software e sites sob medida para o seu negócio</h1>
 
-            <h2>
-              Transformamos ideias complexas em sistemas web robustos,
-              e-commerces de alta conversão e design minimalista.
-            </h2>
+            <p class="home-lead">
+              Criamos sites, sistemas web e e&#8209;commerces com código próprio —
+              rápidos, seguros e prontos para crescer junto com a sua empresa.
+            </p>
+
+            <!-- Hierarquia dos botões: UMA ação principal (orçamento) e uma
+                 secundária (ver projetos). Dois botões iguais fazem o
+                 visitante parar pra pensar qual apertar. -->
+            <div class="home-cta-buttons">
+              <a
+                class="btn btn-primario"
+                href="https://wa.me/5551980128983?text=Ol%C3%A1%20Rafael%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20projeto%21"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg class="btn-icone" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z" />
+                </svg>
+                Pedir orçamento
+              </a>
+              <a class="btn btn-secundario" href="#projetos">Ver projetos</a>
+            </div>
           </div>
 
-          <div class="home-cta-buttons">
-            <a class="home-cta-button" href="#projetos">Ver Projetos</a>
-            <a
-              class="home-cta-button"
-              href="https://wa.me/5551980128983?text=Ol%C3%A1%20Rafael%2C%20gostaria%20de%20um%20software%21"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Fale Conosco</a
-            >
+          <div class="home-vitrine" aria-hidden="true">
+            <img
+              class="vitrine-tras"
+              src="./assets/img/proj-gicookies.webp"
+              alt=""
+              width="780"
+              height="440"
+            />
+            <img
+              class="vitrine-frente"
+              src="./assets/img/proj-porthon.webp"
+              alt=""
+              width="780"
+              height="440"
+              fetchpriority="high"
+            />
           </div>
         </div>
+      </section>
+
+      <!-- ==================== POR QUE TER UM SITE / SISTEMA ==================== -->
+      <!-- Os 4 motivos NÃO são uma sequência, então não têm número: é uma
+           lista simples (<ul>), cada item com um traço azul em cima. -->
+      <section id="por-que" class="secao surgir-ao-scroll">
+        <div class="secao-cabecalho">
+          <h2 class="secao-titulo">Por que ter um site ou sistema próprio</h2>
+          <p class="secao-subtitulo">
+            Antes de contratar, a maioria das pessoas pesquisa: no Google, no
+            Instagram e, cada vez mais, em IAs como o ChatGPT. Um site próprio é
+            onde o seu negócio se apresenta do jeito certo nessas buscas.
+          </p>
+        </div>
+
+        <ul class="motivos-lista">
+          <li class="motivo">
+            <h3>Ser encontrado no Google</h3>
+            <p>
+              SEO não é mágica nem acontece da noite para o dia. Mas um site
+              rápido, bem estruturado e com o conteúdo certo dá ao Google o que
+              ele precisa para mostrar o seu negócio a quem procura pelo que
+              você oferece.
+            </p>
+          </li>
+          <li class="motivo">
+            <h3>Ser recomendado por IAs</h3>
+            <p>
+              ChatGPT, Gemini e Perplexity já indicam empresas e serviços.
+              Preparamos o site com dados estruturados e conteúdo claro para que
+              essas IAs entendam o que você faz. Ninguém controla o que uma IA
+              responde, mas um site bem preparado aumenta as chances de ser
+              citado.
+            </p>
+          </li>
+          <li class="motivo">
+            <h3>Passar credibilidade</h3>
+            <p>
+              Antes de fechar negócio, o cliente confere quem você é. Um site
+              profissional, com domínio próprio, mostra uma empresa séria e
+              estável, e complementa o que as suas redes sociais já mostram.
+            </p>
+          </li>
+          <li class="motivo">
+            <h3>Automatizar o trabalho manual</h3>
+            <p>
+              Um sistema sob medida organiza pedidos, agendamentos e cadastros,
+              e tira da planilha e do WhatsApp o que hoje toma o tempo da sua
+              equipe.
+            </p>
+          </li>
+        </ul>
       </section>
 
       <!-- ==================== SOBRE NÓS ==================== -->
-      <section id="sobre" class="surgir-ao-scroll">
-        <div class="container-sobre">
-          <h3>Sobre Nós</h3>
-          <p>
-            Fundada por Rafael Bittencourt, a SevenCode nasceu com o propósito
-            de transformar ideias complexas em soluções digitais de alto
-            impacto. Somos uma software house focada no desenvolvimento sob
-            medida, especializada na criação de sites institucionais modernos,
-            sistemas web robustos e e-commerces de alta conversão. Unindo
-            tecnologia de ponta, design minimalista e uma arquitetura de código
-            impecável, entregamos plataformas que não apenas cumprem sua função
-            técnica, mas impulsionam o crescimento real e a eficiência
-            operacional dos nossos clientes.
-          </p>
+      <section id="sobre" class="secao surgir-ao-scroll">
+        <div class="sobre-grid">
+          <div class="sobre-texto">
+            <h2 class="secao-titulo">Sobre a 7 SevenCode</h2>
+            <p>
+              A 7 SevenCode é uma software house de Porto Alegre, fundada por
+              Rafael Bittencourt. Desenvolvemos sites institucionais, sistemas
+              web, SaaS e e&#8209;commerces sob medida para empresas que
+              precisam de tecnologia confiável para operar e crescer.
+            </p>
+            <p>
+              Todo projeto é formalizado em contrato, com escopo, prazo e valor
+              definidos antes do início. Assim os dois lados sabem exatamente o
+              que será entregue, e você acompanha o desenvolvimento de perto
+              até a publicação.
+            </p>
+          </div>
+
+          <!-- Esta lista É uma sequência (as etapas acontecem nesta ordem),
+               por isso faz sentido numerar com <ol>. -->
+          <div class="sobre-processo">
+            <h3>Como funciona</h3>
+            <ol class="processo-lista">
+              <li>
+                <strong>Conversa</strong>
+                <span>Você conta a ideia pelo WhatsApp. Entendemos o problema antes de falar em tecnologia.</span>
+              </li>
+              <li>
+                <strong>Proposta e contrato</strong>
+                <span>Orçamento gratuito com o que será entregue, quando e quanto custa, formalizado em contrato antes de começar.</span>
+              </li>
+              <li>
+                <strong>Desenvolvimento</strong>
+                <span>Você acompanha o andamento e testa as telas antes da entrega final.</span>
+              </li>
+              <li>
+                <strong>Publicação</strong>
+                <span>Colocamos no ar com domínio, SEO e desempenho ajustados.</span>
+              </li>
+            </ol>
+          </div>
         </div>
       </section>
 
-      <!-- ==================== DEVS ==================== -->
-      <section id="devs" class="surgir-ao-scroll">
-        <div class="devs-header">
-          <h3>Equipe</h3>
-          <p class="devs-subtitle">O time por trás da 7 SevenCode</p>
+      <!-- ==================== PROJETOS ==================== -->
+      <section id="projetos" class="secao surgir-ao-scroll">
+        <div class="secao-cabecalho">
+          <h2 class="secao-titulo">Projetos</h2>
+          <p class="secao-subtitulo">Trabalhos reais, em produção, feitos pela 7 SevenCode.</p>
+        </div>
+
+        <div class="projetos-lista">
+          <!-- Porthon -->
+          <article class="projeto">
+            <div class="projeto-image">
+              <img
+                src="./assets/img/proj-porthon.webp"
+                alt="Porthon - sistema de gestão condominial"
+                width="780"
+                height="440"
+                loading="lazy"
+              />
+            </div>
+            <div class="projeto-content">
+              <span class="projeto-tipo">SaaS · Gestão condominial</span>
+              <h3>Porthon</h3>
+              <p>
+                Sistema que centraliza o fluxo de encomendas e o controle de
+                moradores, veículos e funcionários de um condomínio. Roda em
+                produção no condomínio Ventos do Sul e segue recebendo novas
+                funcionalidades para atender outros condomínios.
+              </p>
+              <a class="projeto-link" href="https://porthon.com.br" target="_blank" rel="noopener noreferrer">
+                Visitar porthon.com.br
+              </a>
+            </div>
+          </article>
+
+          <!-- Gi Cookies -->
+          <article class="projeto">
+            <div class="projeto-image">
+              <img
+                src="./assets/img/proj-gicookies.webp"
+                alt="Gi Cookies - e-commerce de biscoitos decorados artesanais"
+                width="780"
+                height="440"
+                loading="lazy"
+              />
+            </div>
+            <div class="projeto-content">
+              <span class="projeto-tipo">E-commerce · Confeitaria</span>
+              <h3>Gi Cookies</h3>
+              <p>
+                Loja online de uma confeitaria artesanal de Porto Alegre. O
+                cliente navega pelo catálogo por tema, monta a sacola, aplica
+                cupom e envia o pedido pronto no WhatsApp. Um painel
+                administrativo próprio gerencia produtos, pedidos, clientes,
+                banners e promoções.
+              </p>
+              <a class="projeto-link" href="https://gicookies.com.br" target="_blank" rel="noopener noreferrer">
+                Visitar gicookies.com.br
+              </a>
+            </div>
+          </article>
+
+          <!-- 7 Planner -->
+          <article class="projeto">
+            <div class="projeto-image">
+              <img
+                src="./assets/img/proj-7planner.webp"
+                alt="7 Planner - plataforma de gestão de recursos e agendamentos"
+                width="780"
+                height="440"
+                loading="lazy"
+              />
+            </div>
+            <div class="projeto-content">
+              <span class="projeto-tipo">Sistema interno · Educação</span>
+              <h3>7 Planner</h3>
+              <p>
+                Plataforma de gestão de recursos e agendamentos de um colégio:
+                demandas de marketing, reservas de Chromebooks e uso de
+                laboratórios e salas de arte. Inclui chat ao vivo integrado
+                com a equipe de T.I.
+              </p>
+              <span class="projeto-privado">Uso interno · Colégio Adventista</span>
+            </div>
+          </article>
+
+          <!-- Psicóloga Laura -->
+          <article class="projeto">
+            <div class="projeto-image">
+              <img
+                src="./assets/img/proj-laura.webp"
+                alt="Site institucional da Psicóloga Laura Bergamo"
+                width="780"
+                height="440"
+                loading="lazy"
+              />
+            </div>
+            <div class="projeto-content">
+              <span class="projeto-tipo">Site institucional · Saúde</span>
+              <h3>Psicóloga Laura Bergamo</h3>
+              <p>
+                Site sob medida com a identidade visual e a paleta da marca,
+                navegação simples para o paciente e SEO aplicado para aparecer
+                bem posicionado nas buscas do Google.
+              </p>
+              <a class="projeto-link" href="https://psilaurabergamo.com.br" target="_blank" rel="noopener noreferrer">
+                Visitar psilaurabergamo.com.br
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================== EQUIPE ==================== -->
+      <section id="devs" class="secao surgir-ao-scroll">
+        <div class="secao-cabecalho">
+          <h2 class="secao-titulo">Equipe</h2>
         </div>
 
         <!--
@@ -325,6 +571,10 @@
 
           Quem entra nesta lista se cadastra no painel, em Acessos, marcando
           "Aparece no site".
+
+          ATENÇÃO: o script.js monta cada card como
+          <article class="dev"> <img class="dev-foto"> <h4> <p> <span class="dev-cargo">
+          Se mudar a estrutura aqui, mude lá também.
         -->
         <div class="devs-lista" data-equipe>
           <article class="dev">
@@ -357,152 +607,17 @@
         </div>
       </section>
 
-      <!-- ==================== PROJETOS ==================== -->
-      <section id="projetos" class="surgir-ao-scroll">
-        <div class="projetos-header">
-          <h3>Projetos</h3>
-          <p class="projetos-subtitle">Reais Desenvolvidos pela 7 SevenCode</p>
-        </div>
-
-        <div class="projetos-lista">
-          <!-- Gi Cookies -->
-          <article class="projeto">
-            <div class="projeto-image">
-              <img
-                src="./assets/img/proj-gicookies.webp"
-                alt="Gi Cookies - e-commerce de biscoitos decorados artesanais"
-                width="780"
-                height="440"
-                loading="lazy"
-              />
-            </div>
-            <div class="projeto-content">
-              <h4>Gi Cookies</h4>
-              <p>
-                E-commerce completo para uma confeitaria artesanal de Porto
-                Alegre. O cliente navega pelo catálogo por tema, monta a sacola,
-                aplica cupom e envia o pedido pronto direto no WhatsApp. Por
-                trás, um painel administrativo próprio gerencia produtos,
-                pedidos, clientes, banners e promoções — transformando o
-                Instagram da marca em uma loja online que vende de verdade.
-              </p>
-              <div class="projeto-meta">
-                <span class="tag-software">E-commerce</span>
-                <a
-                  class="tag-pessoal"
-                  href="https://gicookies.com.br"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >gicookies.com.br</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- Porthon -->
-          <article class="projeto">
-            <div class="projeto-image">
-              <img
-                src="./assets/img/proj-porthon.webp"
-                alt="Porthon - sistema de gestão condominial"
-                width="780"
-                height="440"
-                loading="lazy"
-              />
-            </div>
-            <div class="projeto-content">
-              <h4>Porthon</h4>
-              <p>
-                Sistema integrado de gestão condominial que centraliza o fluxo
-                de encomendas e o controle de moradores, veículos e
-                funcionários. Já lançado e disponível em porthon.com.br, o
-                software roda em produção no condomínio Ventos do Sul e segue
-                recebendo novas funcionalidades para atender outros
-                condomínios.
-              </p>
-              <div class="projeto-meta">
-                <span class="tag-software">SaaS</span>
-                <a
-                  class="tag-pessoal"
-                  href="https://porthon.com.br"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >porthon.com.br</a
-                >
-              </div>
-            </div>
-          </article>
-
-          <!-- 7 Planner -->
-          <article class="projeto">
-            <div class="projeto-image">
-              <img
-                src="./assets/img/proj-7planner.webp"
-                alt="7 Planner - plataforma de gestão de recursos e agendamentos"
-                width="780"
-                height="440"
-                loading="lazy"
-              />
-            </div>
-            <div class="projeto-content">
-              <h4>7 Planner</h4>
-              <p>
-                Plataforma de gestão de recursos e agendamentos institucionais.
-                Controla as demandas de marketing, reservas de Chromebooks e o
-                uso de laboratórios e salas de arte. Inclui também um módulo de
-                chat ao vivo para suporte em tempo real integrado com a equipe
-                de T.I. do colégio.
-              </p>
-              <div class="projeto-meta">
-                <span class="tag-software">System</span>
-                <span class="tag-pessoal">Projeto Interno - Colégio Adventista</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Psicóloga Laura -->
-          <article class="projeto">
-            <div class="projeto-image">
-              <img
-                src="./assets/img/proj-laura.webp"
-                alt="Site institucional da Psicóloga Laura Bergamo"
-                width="780"
-                height="440"
-                loading="lazy"
-              />
-            </div>
-            <div class="projeto-content">
-              <h4>Psicóloga Laura</h4>
-              <p>
-                Site institucional desenvolvido sob medida para a Psicóloga
-                Laura Bergamo. O projeto une uma experiência do usuário (UX)
-                fluida a uma identidade visual personalizada com a paleta de
-                cores da marca, além de aplicar técnicas avançadas de SEO para
-                garantir um excelente posicionamento orgânico no Google.
-              </p>
-              <div class="projeto-meta">
-                <span class="tag-software">Site</span>
-                <a
-                  class="tag-pessoal"
-                  href="https://psilaurabergamo.com.br"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >psilaurabergamo.com.br</a
-                >
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
       <!-- ==================== FAQ (bom para SEO / AEO / GEO) ==================== -->
       <!-- Usa <details> nativo: abre/fecha SEM JavaScript. Fica livre pra você
            reescrever depois com seu próprio JS se quiser treinar. -->
-      <section id="faq" class="surgir-ao-scroll">
-        <div class="faq-container">
+      <section id="faq" class="secao surgir-ao-scroll">
+        <div class="faq-grid">
           <div class="faq-header">
-            <h3>Perguntas Frequentes</h3>
-            <p class="faq-subtitle">Tudo que você precisa saber antes de começar</p>
+            <h2 class="secao-titulo">Perguntas frequentes</h2>
+            <p class="secao-subtitulo">
+              Não achou a sua?
+              <a href="https://wa.me/5551980128983" target="_blank" rel="noopener noreferrer">Pergunte no WhatsApp</a>.
+            </p>
           </div>
 
           <div class="faq-lista">
@@ -525,6 +640,15 @@
             </details>
 
             <details class="faq-item">
+              <summary>Vocês fazem contrato?</summary>
+              <p>
+                Sim. Todo projeto é formalizado em contrato antes do início, com
+                escopo, prazo e valor definidos. Assim você sabe exatamente o
+                que será entregue e quando.
+              </p>
+            </details>
+
+            <details class="faq-item">
               <summary>Vocês desenvolvem sistemas sob medida?</summary>
               <p>
                 Sim. Somos uma software house focada em desenvolvimento sob
@@ -543,6 +667,17 @@
             </details>
 
             <details class="faq-item">
+              <summary>Vocês ajudam o site a aparecer em IAs como o ChatGPT?</summary>
+              <p>
+                Sim. Estruturamos o site com dados estruturados (schema.org),
+                conteúdo organizado e o arquivo llms.txt, que ajudam ferramentas
+                como ChatGPT, Gemini e Perplexity a entender e citar o seu
+                negócio. Nenhuma empresa consegue garantir a recomendação, mas um
+                site bem preparado aumenta as chances.
+              </p>
+            </details>
+
+            <details class="faq-item">
               <summary>Vocês atendem clientes de outras cidades?</summary>
               <p>
                 Sim, atendemos de forma remota clientes de qualquer lugar do
@@ -554,55 +689,94 @@
       </section>
 
       <!-- ==================== CONTATO ==================== -->
-      <section id="contato" class="surgir-ao-scroll">
-        <div class="contato-container">
-          <div class="contato-header">
-            <h3>Transforme sua visão em realidade</h3>
-            <p class="contato-subtitle">
-              Seu projeto merece uma equipe que entenda seu negócio
-            </p>
-          </div>
+      <!-- O "7" de circuito do logo aparece aqui grande, como marca d'água:
+           é a assinatura visual da empresa fechando a página. -->
+      <section id="contato" class="secao surgir-ao-scroll">
+        <div class="contato-painel">
+          <img
+            class="contato-marca"
+            src="./assets/img/logo-7.webp"
+            alt=""
+            width="240"
+            height="240"
+            loading="lazy"
+            aria-hidden="true"
+          />
 
-          <div class="contato-cta-section">
-            <div class="contato-message">
-              <h2>Pronto para dar o próximo passo?</h2>
-              <p class="impacto-text">
-                Não deixe suas ideias guardadas. A concorrência não espera, e o
-                mercado está pronto para quem agir agora.
-              </p>
+          <div class="contato-texto">
+            <h2>Conte o que você precisa construir</h2>
+            <p>
+              Mande uma mensagem com a sua ideia. Respondemos pelo WhatsApp com
+              as próximas etapas e um orçamento sem compromisso.
+            </p>
+
+            <div class="contato-acoes">
+              <a
+                href="https://wa.me/5551980128983?text=Ol%C3%A1%20Rafael%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20projeto%21"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-primario btn-grande"
+              >
+                <svg class="btn-icone" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z" />
+                </svg>
+                Pedir orçamento
+              </a>
+              <a class="contato-telefone" href="tel:+5551980128983">(51) 98012-8983</a>
             </div>
 
-            <a
-              href="https://wa.me/5551980128983?text=Ol%C3%A1%20Rafael%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20projeto%21"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-whatsapp"
-            >
-              Solicitar Orçamento via WhatsApp
-            </a>
-
             <ul class="contato-trust">
-              <li>Resposta rápida via WhatsApp</li>
-              <li>Orçamento sem compromisso</li>
-              <li>Código próprio e sob medida</li>
+              <li>Orçamento gratuito e sem compromisso</li>
+              <li>Contrato com escopo, prazo e valor definidos</li>
+              <li>Atendimento remoto em todo o Brasil</li>
             </ul>
           </div>
         </div>
       </section>
-
-      <!-- ==================== RODAPÉ ==================== -->
-      <footer class="site-footer">
-        <img
-          src="./assets/img/logo-nav.webp"
-          alt="7 SevenCode"
-          width="130"
-          height="24"
-          loading="lazy"
-        />
-        <p>Porto Alegre, RS · Atendimento remoto em todo o Brasil</p>
-        <p>&copy; 2026 7 SevenCode. Todos os direitos reservados.</p>
-      </footer>
     </main>
+
+    <!-- Botão flutuante do WhatsApp (o CSS só mostra no celular) -->
+    <a
+      class="whats-flutuante"
+      href="https://wa.me/5551980128983?text=Ol%C3%A1%20Rafael%2C%20gostaria%20de%20um%20or%C3%A7amento%20para%20meu%20projeto%21"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Pedir orçamento pelo WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z" />
+      </svg>
+    </a>
+
+    <!-- ==================== RODAPÉ ==================== -->
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-marca">
+          <img
+            src="./assets/img/logo-nav.webp"
+            alt="7 SevenCode"
+            width="160"
+            height="30"
+            loading="lazy"
+          />
+          <p>Sites, sistemas web e e-commerces sob medida.</p>
+        </div>
+
+        <div class="footer-coluna">
+          <h2>Contato</h2>
+          <a href="https://wa.me/5551980128983" target="_blank" rel="noopener noreferrer">WhatsApp (51) 98012-8983</a>
+          <a href="https://www.instagram.com/7sevencode_/" target="_blank" rel="noopener noreferrer">Instagram @7sevencode_</a>
+        </div>
+
+        <div class="footer-coluna">
+          <h2>Onde estamos</h2>
+          <p>Porto Alegre, RS</p>
+          <p>Atendimento remoto em todo o Brasil</p>
+        </div>
+      </div>
+
+      <p class="footer-copy">&copy; 2026 7 SevenCode. Todos os direitos reservados.</p>
+    </footer>
 
     <!--
       O ?v= existe para furar cache. Sem ele, o navegador de quem já visitou
