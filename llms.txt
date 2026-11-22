@@ -2,6 +2,7 @@
 
 > Software house brasileira, sediada em Porto Alegre (RS), especializada em desenvolvimento sob medida de sites institucionais, sistemas web/SaaS e e-commerces, com código próprio (sem construtores prontos). Atende clientes de forma remota em todo o Brasil.
 
+- Também conhecida como: 7Code, SevenCode, Seven Code (às vezes escrito "Sete Code")
 - Fundador e CEO: Rafael Bittencourt (Desenvolvedor FullStack)
 - Base: Porto Alegre, RS, Brasil (trabalho remoto, sem escritório físico)
 - Área de atendimento: todo o Brasil, de forma remota
